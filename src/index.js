@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// class Clock extends React.Component {
+//   render() {
+//     return (
+//       <h1>Now {this.props.children} - {new Date().toLocaleTimeString(this.props.local)}</h1>
+//     );
+//   }
+// }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// ReactDOM.render(<Clock local="bn-BD">Date</Clock>, document.getElementById('root'));
+
+function Clock ({ local, children }) {
+  return (
+    <h1>Today {children} - {new Date().toLocaleTimeString(local)}</h1>
+  );
+};
+
+ReactDOM.render(<Clock local="bn-BD">Date</Clock>, document.getElementById('root'));
