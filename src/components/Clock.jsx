@@ -1,16 +1,20 @@
 import { Component } from 'react';
+import Button from './Button'
 
 class Clock extends Component {
 
     // constructor(props) {
     //     super(props);
     //     this.state = {
-    //         date: new Date()
+    //         date: new Date(),
+    //         local: 'en-US'
     //     };
+    //     this.handleClick = this.handleClick.bind(this);
     // }
 
     state = {
-        date: new Date()
+        date: new Date(),
+        local: 'en-US'
     };
 
     componentDidMount() {
@@ -21,9 +25,11 @@ class Clock extends Component {
         clearInterval(this.clockTimer);
     }
 
-    handleClick(e) {
+    handleClick = (e, local) => {
         e.preventDefault();
-        console.log('Button was clicked!');
+        this.setState({
+            local
+        });
     }
 
     tick() {
@@ -33,14 +39,26 @@ class Clock extends Component {
     }
 
     render() {
-        const { date } = this.state;
+        const { date, local } = this.state;
+        // let button;
+        // if (local === 'en-US') {
+        //     button = <Button change={this.handleClick} local="bn-BD" />
+        // } else {
+        //     button = <Button change={this.handleClick} local="en-US" />
+        // }
         return (
             <div>
                 <h1 className="heading">
                     <span>Clock: </span>
-                    <span className="text">{date.toLocaleTimeString(this.props.local)}</span>
+                    {/* <span className="text">{date.toLocaleTimeString(this.props.local)}</span> */}
+                    <span className="text">{date.toLocaleTimeString(local)}</span>
                 </h1>
-                <a href="/" onClick={this.handleClick}>Click Me</a>
+                {local === 'en-US' ? (
+                    <Button change={this.handleClick} local="bn-BD" />
+                ) : (
+                    <Button change={this.handleClick} local="en-US" />
+                )}
+                {/* {button} */}
             </div>
         );
     }
